@@ -1,2 +1,4 @@
 # names
-Parse names of people 
+
+Parse names of people in Go (Golang).
+
