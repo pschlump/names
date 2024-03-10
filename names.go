@@ -387,7 +387,7 @@ func splitNameIntoParts(fullName string) (parts []string, comma []bool) {
 	return
 }
 
-// Find and remove the items that end in '.' like Dr.
+// searchMapForParts will find and remove the items that end in '.' like Dr.
 func searchMapForParts(list map[string]bool, nameParts *[]string, nameCommas *[]bool) (partsFound []string) {
 	if db1 {
 		dbgo.Printf("*nameParts %s, %(LF)\n", dbgo.SVar(*nameParts))
@@ -444,7 +444,7 @@ func joinConjunctions(nameParts *[]string, nameCommas *[]bool) {
 		for ii := len((*nameParts)) - 3; ii >= 0; ii-- {
 			if found, ok := conjunctionListLookup[(*nameParts)[ii+1]]; ok && found {
 				(*nameParts)[ii] = (*nameParts)[ii] + " " + (*nameParts)[ii+1] + " " + (*nameParts)[ii+2]
-				(*nameParts) = append((*nameParts)[:ii+1], (*nameParts)[ii+3:]...)  
+				(*nameParts) = append((*nameParts)[:ii+1], (*nameParts)[ii+3:]...)
 				(*nameCommas) = append((*nameCommas)[:ii], (*nameCommas)[ii+2:]...)
 				ii--
 			}
@@ -460,7 +460,7 @@ func findExtraSuffixes(nameParts *[]string, nameCommas *[]bool) (extraSuffixes [
 		}
 	}
 	if commasCount > 1 {
-		for ii := len((*nameParts)) - 1; ii >= 2; ii-- { // xyzzy - replace with map
+		for ii := len((*nameParts)) - 1; ii >= 2; ii-- {
 			if (*nameCommas)[ii] {
 				extraSuffixes = append(extraSuffixes, (*nameParts)[ii])
 				(*nameParts) = g_lib.RemoveAt(*nameParts, ii)
@@ -479,7 +479,7 @@ func extractLastName(nameParts *[]string, nameCommas *[]bool) (lastname string) 
 		}
 	}
 	lastname = (*nameParts)[posFirstComma]
-	(*nameParts) = append((*nameParts)[:posFirstComma], (*nameParts)[posFirstComma+1:]...) // xyzzy Remove
+	(*nameParts) = g_lib.RemoveAt(*nameParts, posFirstComma)
 	(*nameCommas) = (*nameCommas)[:0]
 	return
 }
