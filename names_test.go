@@ -126,3 +126,36 @@ func TestParseFullname(t *testing.T) {
 		}
 	}
 }
+
+func Test_findNickName(t *testing.T) {
+	type args struct {
+		fullName string
+	}
+	tests := []struct {
+		name            string
+		args            args
+		wantPartsFound  []string
+		wantNewFullName string
+	}{
+		// func findNickName(fullName string) (partsFound []string, newFullName string) {
+		{
+			name:            "1st test of findNickName",
+			args:            args{fullName: "Philip Schlump (Fuzzy)"},
+			wantPartsFound:  []string{"Fuzzy"},
+			wantNewFullName: "Philip Schlump",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotPartsFound, gotNewFullName := findNickName(tt.args.fullName)
+			if !reflect.DeepEqual(gotPartsFound, tt.wantPartsFound) {
+				t.Errorf("findNickName() gotPartsFound = %v, want %v", gotPartsFound, tt.wantPartsFound)
+			}
+			if gotNewFullName != tt.wantNewFullName {
+				t.Errorf("findNickName() gotNewFullName = %v, want %v", gotNewFullName, tt.wantNewFullName)
+			}
+		})
+	}
+}
+
+/* vim: set noai ts=4 sw=4: */

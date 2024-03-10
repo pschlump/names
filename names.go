@@ -548,3 +548,5 @@ func ParseFullName(fullName string) (parsedName ParsedName) {
 }
 
 const db1 = false
+
+/* vim: set noai ts=4 sw=4: */
