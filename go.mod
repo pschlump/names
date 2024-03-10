@@ -1,6 +1,4 @@
-module github.com/write-it-right/write-it-right/names
-
-// module github.com/pschlump/names
+module github.com/pschlump/names
 
 go 1.22.0
 
